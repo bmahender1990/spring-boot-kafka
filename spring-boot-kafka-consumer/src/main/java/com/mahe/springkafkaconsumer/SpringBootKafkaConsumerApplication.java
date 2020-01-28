@@ -1,4 +1,4 @@
-package com.mahe.springbootkafkaconsumer;
+package com.mahe.springkafkaconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
