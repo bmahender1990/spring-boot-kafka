@@ -18,8 +18,8 @@ import com.mahe.springkafkaproducer.model.Customer;
 @Configuration
 public class KafkaConfiguration {
 
-    @Value("${kafka.bootstrap-server}")
-    private String server;
+	@Value("${kafka.bootstrap-server}")
+	private String server;
 	
 	@Bean
 	public ProducerFactory<String, Customer> producerFactory() {

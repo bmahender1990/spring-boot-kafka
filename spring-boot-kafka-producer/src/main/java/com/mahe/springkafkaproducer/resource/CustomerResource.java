@@ -1,7 +1,8 @@
 package com.mahe.springkafkaproducer.resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,7 +18,7 @@ import com.mahe.springkafkaproducer.model.Customer;
 @RestController
 @RequestMapping("kafka")
 public class CustomerResource {
-	private static final Logger LOG = LoggerFactory.getLogger(CustomerResource.class);
+	private static final Logger LOG = LogManager.getLogger(CustomerResource.class);
 	@Autowired
 	KafkaTemplate<String, Customer> kafkaTemplate;
 	

@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mahe.springkafkaproducer.security.JWTAuthorizationFilter;
 import com.mahe.springkafkaproducer.security.JwtRequestFilter;
 import com.mahe.springkafkaproducer.security.model.AuthenticationRequest;
 import com.mahe.springkafkaproducer.security.model.AuthenticationResponse;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info" name="example">
+    <Appenders>
+    	<Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <Socket name="socket" host="127.0.0.1" port="15000">
+            <PatternLayout pattern="%p: %m%n" charset="UTF-8"/>
+        </Socket>
+        
+        <SplunkHttp name="http-input"
+              url="http://localhost:5555"
+              token="11111111-2222-3333-4444-555555555555"
+              host=""
+              index=""
+              source="splunktest"
+              sourcetype="battlecat"
+              messageFormat="text"
+              middleware="HttpEventCollectorUnitTestMiddleware"
+              batch_size_bytes="0"
+              batch_size_count="0"
+              batch_interval="0"
+              disableCertificateValidation="true">
+            <PatternLayout pattern="%m"/>
+        </SplunkHttp>
+    </Appenders>
+    <!-- Define a logger named 'splunk.logger' which writes to the socket appender we defined above. -->
+    <Loggers>
+        <Root level="INFO">
+        </Root>
+        <Logger name="org" level="info" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        
+        <Logger name="splunk.logger" level="info">
+            <AppenderRef ref="socket"/>
+        </Logger>
+        
+        <Logger name="splunk.log4j" level="info">
+            <AppenderRef ref="http-input"/>
+        </Logger>
+
+    </Loggers>
+
+</Configuration>
