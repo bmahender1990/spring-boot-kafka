@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
+	@Value("${token_exp_mins}")
+	private int token_exp_mins;
+	
     static Key SECRET_KEY = MacProvider.generateKey();
 
     public String extractUsername(String token) throws Exception {
@@ -50,7 +54,7 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String subject) {
     	final Date createdDate = new Date(System.currentTimeMillis());
-        final Date expirationDate = new Date(System.currentTimeMillis() + 1000 * 60 *  10);
+        final Date expirationDate = new Date(System.currentTimeMillis() + 1000 * 60 * token_exp_mins);
         
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
                 .setExpiration(expirationDate)//10min
@@ -69,7 +73,7 @@ public class JwtUtil {
         }catch (MalformedJwtException ex){
             System.out.println("Invalid JWT token");
         }catch (ExpiredJwtException ex){
-            System.out.println("Expired JWT token");            
+            System.out.println("Expired JWT token");
         }catch (UnsupportedJwtException ex){
             System.out.println("Unsupported JWT exception");
         }catch (IllegalArgumentException ex){
