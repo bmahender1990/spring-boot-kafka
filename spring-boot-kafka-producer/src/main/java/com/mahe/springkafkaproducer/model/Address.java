@@ -1,13 +1,20 @@
 package com.mahe.springkafkaproducer.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Address {
+	@NotBlank(message = "addressLine1 is mandatory")
+	@Size(max = 50, message = "addressLine1 should have maximum 50 characters")
 	private String addressLine1;
 	private String addressLine2;
 	private String street;
+	
+	@NotBlank(message = "postalCode is mandatory")
+	@Size(max = 5, message = "postalCode should have maximum 5 characters")
 	private String postalCode;
 	
-	
-	
+		
 	public Address() {	}
 
 	public Address(String addressLine1, String addressLine2, String street, String postalCode) {		

@@ -9,6 +9,8 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-
+	private static final Logger LOG = LogManager.getLogger(JwtUtil.class);
 	@Value("${token_exp_mins}")
 	private int token_exp_mins;
 	
@@ -57,29 +59,27 @@ public class JwtUtil {
         final Date expirationDate = new Date(System.currentTimeMillis() + 1000 * 60 * token_exp_mins);
         
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
-                .setExpiration(expirationDate)//10min
+                .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
        
-//    	final String username = extractUsername(token);
-//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
         try {       	
 			final String username = extractUsername(token);
 			return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));				
         }catch (SignatureException ex){
-            System.out.println("Invalid JWT Signature");
+        	LOG.error("Invalid JWT Signature");
         }catch (MalformedJwtException ex){
-            System.out.println("Invalid JWT token");
+        	LOG.error("Invalid JWT token");
         }catch (ExpiredJwtException ex){
-            System.out.println("Expired JWT token");
+        	LOG.error("Expired JWT token");
         }catch (UnsupportedJwtException ex){
-            System.out.println("Unsupported JWT exception");
+        	LOG.error("Unsupported JWT exception");
         }catch (IllegalArgumentException ex){
-            System.out.println("Jwt claims string is empty");
+        	LOG.error("Jwt claims string is empty");
         }catch (Exception ex) {
-        	System.out.println("ex");
+        	LOG.error("ex");
         }
         return false;
     }

@@ -24,7 +24,7 @@ public class KafkaConfiguration {
 	@Bean
 	public ProducerFactory<String, Customer> producerFactory() {
 		
-		Map<String,Object> configs=new HashMap();		
+		Map<String,Object> configs=new HashMap<String,Object>();		
 		configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, server);
 		configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
