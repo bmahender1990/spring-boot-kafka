@@ -18,8 +18,8 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @Configuration
 public class KafkaConfiguration {
 	
-	 @Value("${kafka.bootstrap-server}")
-	    private String server;
+	@Value("${kafka.bootstrap-server}")
+	private String server;
 	
 	@Bean
 	public ConsumerFactory<String, Object> consumerFactory(){
