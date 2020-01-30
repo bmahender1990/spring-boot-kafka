@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name = "customer_data")
 @Table(name = "customer_data")
 public class Customer {
@@ -22,6 +24,7 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	@Type(type="date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "DD-MM-YYYY")
 	private Date birthdate;
 	private String country;
 	private String countryCode;
