@@ -20,6 +20,7 @@ public class Customer {
 	private String lastName;
 	
 	@NotBlank(message = "birthdate is mandatory")
+	@Pattern(regexp = "^\\d{2}-\\d{2}-\\d{4}", message="birthdate should be in DD-MM-YYYY format")
 	private String birthdate;
 	
 	@NotBlank(message = "country is mandatory")
