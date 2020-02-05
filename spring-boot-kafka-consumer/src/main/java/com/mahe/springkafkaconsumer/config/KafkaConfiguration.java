@@ -38,42 +38,5 @@ public class KafkaConfiguration {
 		factory.setConsumerFactory(consumerFactory());
 		return factory;
 	}
-
-	
-	
-	
-/*	@Bean
-	public ConsumerFactory<String, Customer> CustomerConsumerFactory(){
-		Map<String,Object> config = new HashMap<>();
-		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, server);
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
-		config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-		
-		return new DefaultKafkaConsumerFactory<String, Customer>(config,new StringDeserializer(), new JsonDeserializer<>(Customer.class));
-	}
-	
-
-	    @Bean
-	    public ConcurrentKafkaListenerContainerFactory<String, Customer> customerkafkaListenerContainerFactory() {
-	        ConcurrentKafkaListenerContainerFactory<String, Customer> factory =        new ConcurrentKafkaListenerContainerFactory<>();
-	        factory.setConsumerFactory(consumerFactory());
-	        return factory;
-	    }*/
-	    
-//	    @Bean
-//	    public ConsumerFactory<String, Car> consumerFactory() {
-//	      return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-//	          new JsonDeserializer<>(Car.class));
-//	    }
-//
-//	    @Bean
-//	    public ConcurrentKafkaListenerContainerFactory<String, Car> kafkaListenerContainerFactory() {
-//	      ConcurrentKafkaListenerContainerFactory<String, Car> factory =
-//	          new ConcurrentKafkaListenerContainerFactory<>();
-//	      factory.setConsumerFactory(consumerFactory());
-//
-//	      return factory;
-//	    }
 	
 }

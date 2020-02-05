@@ -13,30 +13,31 @@ import javax.persistence.Table;
 public class AuditLog {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int ID;
+	private int id;
 	@Column
-	private String CUSTOMER_NUMBER;
+	private String customerNumber;
 	@Column(length=1000)
-	private String PAYLOAD;
+	private String payload;
 	
-	public int getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getCUSTOMER_NUMBER() {
-		return CUSTOMER_NUMBER;
+	public String getCustomerNumber() {
+		return customerNumber;
 	}
-	public void setCUSTOMER_NUMBER(String cUSTOMER_NUMBER) {
-		CUSTOMER_NUMBER = cUSTOMER_NUMBER;
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
 	}
-	public String getPAYLOAD() {
-		return PAYLOAD;
+	public String getPayload() {
+		return payload;
 	}
-	public void setPAYLOAD(String pAYLOAD) {
-		PAYLOAD = pAYLOAD;
+	public void setPayload(String payload) {
+		this.payload = payload;
 	}
+	
 	
 
 }

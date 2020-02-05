@@ -37,8 +37,8 @@ public class KafkaConsumer {
 			service.addCustomer(customer);
 			
 			AuditLog audit =new AuditLog();			
-			audit.setCUSTOMER_NUMBER(customer.getCustomerNumber());
-			audit.setPAYLOAD(customerStr);
+			audit.setCustomerNumber(customer.getCustomerNumber());
+			audit.setPayload(customerStr);
 			service.addAudit(audit);
 			
 		}  catch (Exception e) {
