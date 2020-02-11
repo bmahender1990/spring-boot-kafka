@@ -41,7 +41,7 @@ public class Customer {
   private String countryCode = null;
 
   @JsonProperty("mobileNumber")
-  private Integer mobileNumber = null;
+  private String mobileNumber = null;
 
   @JsonProperty("email")
   private String email = null;
@@ -167,10 +167,10 @@ public class Customer {
    * @return birthdate
    **/
   @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @NotNull(message = "birthdate is mandatory")
 
   @Valid
-  @NotBlank(message = "birthdate is mandatory")
+
   public LocalDate getBirthdate() {
     return birthdate;
   }
@@ -224,7 +224,7 @@ public class Customer {
     this.countryCode = countryCode;
   }
 
-  public Customer mobileNumber(Integer mobileNumber) {
+  public Customer mobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
     return this;
   }
@@ -235,15 +235,13 @@ public class Customer {
    * @return mobileNumber
    **/
   @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @NotBlank(message = "mobileNumber is mandatory")
-  @Size(max = 10, message = "mobileNumber should have maximum 2 characters")
-  public Integer getMobileNumber() {
+  @NotNull(message = "mobileNumber is mandatory")
+  @Size(max = 10, message = "mobileNumber should have maximum 10 characters")
+  public String getMobileNumber() {
     return mobileNumber;
   }
 
-  public void setMobileNumber(Integer mobileNumber) {
+  public void setMobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
   }
 
@@ -282,8 +280,7 @@ public class Customer {
    * @return customerStatus
    **/
   @ApiModelProperty(required = true, value = "")
-  @NotNull
-  @NotBlank(message = "customerStatus is mandatory")
+  @NotNull(message = "customerStatus is mandatory")
 
   public CustomerStatusEnum getCustomerStatus() {
     return customerStatus;
