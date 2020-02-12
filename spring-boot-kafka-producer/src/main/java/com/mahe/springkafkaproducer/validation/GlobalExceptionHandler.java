@@ -15,7 +15,7 @@ import com.mahe.springkafkaproducer.model.ErrorDetails;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-	
+    
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
@@ -31,11 +31,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
            HttpHeaders headers, HttpStatus status, WebRequest request) {
-    	
-	    	String errormsg="";
-	    	if(ex.getBindingResult().getAllErrors() != null && !ex.getBindingResult().getAllErrors().isEmpty()) {
-	    		errormsg=ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-	    	}
+        
+            String errormsg="";
+            if(ex.getBindingResult().getAllErrors() != null && !ex.getBindingResult().getAllErrors().isEmpty()) {
+                errormsg=ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+            }
            ErrorDetails errorDetails = new ErrorDetails(new Date(), "Validation Failed", errormsg);
            return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     } 
