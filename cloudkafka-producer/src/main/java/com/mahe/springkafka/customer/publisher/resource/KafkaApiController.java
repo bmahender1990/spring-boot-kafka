@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mahe.springkafka.customer.publisher.api.KafkaApi;
 import com.mahe.springkafka.customer.publisher.model.Customer;
 import com.mahe.springkafka.customer.publisher.model.CustomerResponse;
-import com.mahe.springkafka.customer.publisher.service.KafkaProducerService;
+import com.mahe.springkafka.customer.publisher.service.impl.KafkaProducerServiceImpl;
 import io.swagger.annotations.ApiParam;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
@@ -29,7 +29,7 @@ public class KafkaApiController implements KafkaApi {
 
   private final HttpServletRequest request;
   @Autowired
-  private KafkaProducerService producer;
+  private KafkaProducerServiceImpl producer;
 
   @Autowired
   public KafkaApiController(ObjectMapper objectMapper, HttpServletRequest request) {
