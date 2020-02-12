@@ -4,6 +4,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -12,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
     date = "2020-02-10T06:28:00.393Z")
-
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class CustomerResponse {
   @JsonProperty("status")
   private String status = null;

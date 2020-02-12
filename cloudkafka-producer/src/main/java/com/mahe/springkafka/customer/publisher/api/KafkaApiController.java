@@ -2,8 +2,8 @@ package com.mahe.springkafka.customer.publisher.api;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiParam;
 @Controller
 public class KafkaApiController implements KafkaApi {
 
-  private static final Logger log = LoggerFactory.getLogger(KafkaApiController.class);
+  private static final Logger LOGGER = LogManager.getLogger(KafkaApiController.class);
 
   private final ObjectMapper objectMapper;
 

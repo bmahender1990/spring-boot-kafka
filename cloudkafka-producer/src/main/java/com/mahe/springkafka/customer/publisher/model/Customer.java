@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
-import org.threeten.bp.LocalDate;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,7 +32,7 @@ public class Customer {
   private String lastName = null;
 
   @JsonProperty("birthdate")
-  private LocalDate birthdate = null;
+  private String birthdate = null;
 
   @JsonProperty("country")
   private String country = null;
@@ -156,7 +156,7 @@ public class Customer {
     this.lastName = lastName;
   }
 
-  public Customer birthdate(LocalDate birthdate) {
+  public Customer birthdate(String birthdate) {
     this.birthdate = birthdate;
     return this;
   }
@@ -168,14 +168,14 @@ public class Customer {
    **/
   @ApiModelProperty(required = true, value = "")
   @NotNull(message = "birthdate is mandatory")
-
   @Valid
-
-  public LocalDate getBirthdate() {
+  @JsonProperty("birthdate")
+  @JsonFormat(pattern = "DD-MM-YYYY")
+  public String getBirthdate() {
     return birthdate;
   }
 
-  public void setBirthdate(LocalDate birthdate) {
+  public void setBirthdate(String birthdate) {
     this.birthdate = birthdate;
   }
 
