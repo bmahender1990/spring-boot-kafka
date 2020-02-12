@@ -1,14 +1,15 @@
-package com.mahe.springkafka.customer.publisher.api;
+package com.mahe.springkafka.customer.publisher.resource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mahe.springkafka.customer.publisher.api.AuthenticateApi;
 import com.mahe.springkafka.customer.publisher.model.User;
 import io.swagger.annotations.ApiParam;
 
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiParam;
 @Controller
 public class AuthenticateApiController implements AuthenticateApi {
 
-  private static final Logger log = LoggerFactory.getLogger(AuthenticateApiController.class);
+  private static final Logger LOGGER = LogManager.getLogger(KafkaApiController.class);
 
   private final ObjectMapper objectMapper;
 

@@ -1,4 +1,4 @@
-package com.mahe.springkafka.customer.publisher.api;
+package com.mahe.springkafka.customer.publisher.resource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mahe.springkafka.customer.publisher.api.KafkaApi;
 import com.mahe.springkafka.customer.publisher.model.Customer;
 import com.mahe.springkafka.customer.publisher.model.CustomerResponse;
 import com.mahe.springkafka.customer.publisher.service.KafkaProducerService;
