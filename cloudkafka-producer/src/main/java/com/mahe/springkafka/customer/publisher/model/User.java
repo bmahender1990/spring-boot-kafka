@@ -1,21 +1,18 @@
 package com.mahe.springkafka.customer.publisher.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * User
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-02-10T06:28:00.393Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
+    date = "2020-02-10T06:28:00.393Z")
 
-public class User   {
+public class User {
   @JsonProperty("username")
   private String username = null;
 
@@ -29,8 +26,9 @@ public class User   {
 
   /**
    * Get username
+   * 
    * @return username
-  **/
+   **/
   @ApiModelProperty(value = "")
 
 
@@ -49,8 +47,9 @@ public class User   {
 
   /**
    * Get password
+   * 
    * @return password
-  **/
+   **/
   @ApiModelProperty(value = "")
 
 
@@ -72,8 +71,8 @@ public class User   {
       return false;
     }
     User user = (User) o;
-    return Objects.equals(this.username, user.username) &&
-        Objects.equals(this.password, user.password);
+    return Objects.equals(this.username, user.username)
+        && Objects.equals(this.password, user.password);
   }
 
   @Override
@@ -85,7 +84,7 @@ public class User   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
-    
+
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
@@ -93,8 +92,7 @@ public class User   {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
