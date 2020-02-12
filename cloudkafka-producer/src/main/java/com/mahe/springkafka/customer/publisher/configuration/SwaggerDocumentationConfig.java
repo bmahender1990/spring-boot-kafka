@@ -24,10 +24,7 @@ public class SwaggerDocumentationConfig {
   @Bean
   public Docket customImplementation() {
     return new Docket(DocumentationType.SWAGGER_2).select()
-        .apis(RequestHandlerSelectors.basePackage("com.mahe.springkafka.customer.publisher.api"))
-        .build().directModelSubstitute(org.threeten.bp.LocalDate.class, java.sql.Date.class)
-        .directModelSubstitute(org.threeten.bp.OffsetDateTime.class, java.util.Date.class)
-        .apiInfo(apiInfo());
+        .apis(RequestHandlerSelectors.basePackage("com.mahe")).build().apiInfo(apiInfo());
   }
 
 }
