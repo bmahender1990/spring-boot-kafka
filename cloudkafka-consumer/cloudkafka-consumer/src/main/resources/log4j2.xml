@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://logging.apache.org/log4j/2.0/config"
+       status="OFF" packages="com.mahe">
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyyMMdd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %spi%n"/>		   
+		</Console>
+	</Appenders>
+	<Socket name="socket" host="127.0.0.1" port="15000">
+		<PatternLayout pattern="%d{yyyyMMdd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %spi%n"  />
+	</Socket>
+	<loggers>
+		<!-- <Logger name="org.apache.log4j.xml" level="all" /> -->
+		<Logger name="com.mahe" level="all" />
+		<root level="all">
+			<appender-ref ref="STDOUT" level="all" />
+		</root>
+		<Logger name="splunk.logger" level="info">
+            <AppenderRef ref="socket"/>
+            <AppenderRef ref="http-input"/>
+        </Logger>
+	</loggers>
+</configuration>
