@@ -93,7 +93,7 @@ paths:
           schema:
             $ref: '#/definitions/CustomerResponse'
       security:
-      - sec_auth: []
+      - api_key: []
          
  
   

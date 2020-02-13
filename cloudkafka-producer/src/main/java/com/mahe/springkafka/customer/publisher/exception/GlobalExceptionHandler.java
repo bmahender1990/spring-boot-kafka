@@ -42,6 +42,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
     CustomerResponse errorDetails =
         new CustomerResponse("error", errormsg, "InvalidRequestException");
-    return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
   }
 }
