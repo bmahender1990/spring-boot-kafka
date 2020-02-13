@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns="http://logging.apache.org/log4j/2.0/config"
-       status="OFF" packages="com.mahe">
+       status="OFF" packages="com.prokarma">
 	<Appenders>
 		<Console name="STDOUT" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{yyyyMMdd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %spi%n"/>		   
@@ -10,7 +10,7 @@
 		<PatternLayout pattern="%d{yyyyMMdd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %spi%n"  />
 	</Socket>
 	<loggers>
-		<Logger name="com.mahe" level="all" />
+		<Logger name="com.prokarma" level="all" />
 		<root level="all">
 			<appender-ref ref="STDOUT" level="info" />
 		</root>
