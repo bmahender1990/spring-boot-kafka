@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import com.mahe.springkafka.customer.publisher.security.util.JwtUtil;
-import com.mahe.springkafka.customer.publisher.service.AppUserDetailsService;
+import com.mahe.springkafka.customer.publisher.service.impl.AppUserDetailsServiceImpl;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -25,7 +25,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   private JwtUtil jwtUtil;
 
   @Autowired
-  private AppUserDetailsService userDetailsService;
+  private AppUserDetailsServiceImpl userDetailsService;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

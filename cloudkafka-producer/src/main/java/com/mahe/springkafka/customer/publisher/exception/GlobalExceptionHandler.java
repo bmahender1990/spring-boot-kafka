@@ -20,7 +20,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex,
       WebRequest request) {
     CustomerResponse errorDetails =
-        new CustomerResponse("error", ex.getMessage(), "InvalidRequestException");
+        new CustomerResponse("error", ex.getMessage(), "ResourceNotFoundException");
     return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
   }
 

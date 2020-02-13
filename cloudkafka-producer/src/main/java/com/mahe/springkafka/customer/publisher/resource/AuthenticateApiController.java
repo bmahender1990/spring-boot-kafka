@@ -39,8 +39,6 @@ public class AuthenticateApiController implements AuthenticateApi {
   @Autowired
   private AppUserDetailsService userDetailsService;
 
-
-
   @org.springframework.beans.factory.annotation.Autowired
   public AuthenticateApiController(ObjectMapper objectMapper, HttpServletRequest request) {
     this.objectMapper = objectMapper;
