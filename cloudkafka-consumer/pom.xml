@@ -8,7 +8,7 @@
 		<version>2.2.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mahe</groupId>
+	<groupId>com.prokarma</groupId>
 	<artifactId>cloudkafka-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cloudkafka-consumer</name>
@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.mahe.springkafkaconsumer.ConsumerApplication</start-class>
+		<start-class>com.prokarma.engineering.customer.consumer.ConsumerApplication</start-class>
 	</properties>
 
 	<dependencies>
