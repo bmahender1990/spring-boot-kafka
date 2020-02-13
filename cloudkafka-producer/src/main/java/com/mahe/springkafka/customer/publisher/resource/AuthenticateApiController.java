@@ -16,7 +16,7 @@ import com.mahe.springkafka.customer.publisher.api.AuthenticateApi;
 import com.mahe.springkafka.customer.publisher.model.User;
 import com.mahe.springkafka.customer.publisher.security.model.AuthenticationResponse;
 import com.mahe.springkafka.customer.publisher.security.util.JwtUtil;
-import com.mahe.springkafka.customer.publisher.service.AppUserDetailsService;
+import com.mahe.springkafka.customer.publisher.service.impl.AppUserDetailsServiceImpl;
 import io.swagger.annotations.ApiParam;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
@@ -37,7 +37,7 @@ public class AuthenticateApiController implements AuthenticateApi {
   private JwtUtil jwtTokenUtil;
 
   @Autowired
-  private AppUserDetailsService userDetailsService;
+  private AppUserDetailsServiceImpl userDetailsService;
 
   @org.springframework.beans.factory.annotation.Autowired
   public AuthenticateApiController(ObjectMapper objectMapper, HttpServletRequest request) {

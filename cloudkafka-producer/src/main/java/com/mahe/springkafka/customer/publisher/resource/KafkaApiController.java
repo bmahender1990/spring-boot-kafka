@@ -40,6 +40,8 @@ public class KafkaApiController implements KafkaApi {
   public ResponseEntity<?> customer(
       @ApiParam(value = "customer object that needs to be post to kafka",
           required = true) @Valid @RequestBody Customer customer,
+      @ApiParam(value = "Authorization token", required = true) @RequestHeader(
+          value = "Authorization", required = true) String authorization,
       @ApiParam(value = "") @RequestHeader(value = "Application-Id",
           required = false) String applicationId,
       @ApiParam(value = "") @RequestHeader(value = "Activity-Id",
