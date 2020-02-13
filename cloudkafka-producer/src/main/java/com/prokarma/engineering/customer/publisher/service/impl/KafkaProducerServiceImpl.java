@@ -6,12 +6,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.service.KafkaProducerService;
 
-@Component
+@Service
 public class KafkaProducerServiceImpl implements KafkaProducerService {
 
   private static final Logger LOGGER = LogManager.getLogger(KafkaProducerServiceImpl.class);
