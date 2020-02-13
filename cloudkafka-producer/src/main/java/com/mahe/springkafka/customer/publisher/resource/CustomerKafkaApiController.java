@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mahe.springkafka.customer.publisher.api.KafkaApi;
+import com.mahe.springkafka.customer.publisher.api.CustomerKafkaApi;
 import com.mahe.springkafka.customer.publisher.model.Customer;
 import com.mahe.springkafka.customer.publisher.model.CustomerResponse;
 import com.mahe.springkafka.customer.publisher.service.impl.KafkaProducerServiceImpl;
@@ -21,9 +21,9 @@ import io.swagger.annotations.ApiParam;
     date = "2020-02-10T06:28:00.393Z")
 
 @Controller
-public class KafkaApiController implements KafkaApi {
+public class CustomerKafkaApiController implements CustomerKafkaApi {
 
-  private static final Logger LOGGER = LogManager.getLogger(KafkaApiController.class);
+  private static final Logger LOGGER = LogManager.getLogger(CustomerKafkaApiController.class);
 
   private final ObjectMapper objectMapper;
 
@@ -32,7 +32,7 @@ public class KafkaApiController implements KafkaApi {
   private KafkaProducerServiceImpl producer;
 
   @Autowired
-  public KafkaApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+  public CustomerKafkaApiController(ObjectMapper objectMapper, HttpServletRequest request) {
     this.objectMapper = objectMapper;
     this.request = request;
   }

@@ -21,7 +21,7 @@ import io.swagger.annotations.Authorization;
 
 @Api(value = "kafka", description = "the kafka API")
 @RequestMapping(value = "")
-public interface KafkaApi {
+public interface CustomerKafkaApi {
 
   @ApiOperation(value = "Post customer data to kafka", nickname = "customer",
       notes = "Returns status", authorizations = {@Authorization(value = "o_auth", scopes = {})},
