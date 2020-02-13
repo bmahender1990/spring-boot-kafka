@@ -32,6 +32,7 @@ public class KafkaConsumer {
       auditLogService.save(payload);
 
     } catch (Exception exception) {
+      LOGGER.error("Error occured  -- > {}", payload);
       errorLogService.save(exception, payload);
     }
 

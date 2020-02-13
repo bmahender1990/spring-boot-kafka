@@ -17,7 +17,6 @@ public class AuditLogServiceImpl implements AuditLogService {
   private AuditLogRepository auditLogRepository;
 
 
-
   @Override
   public void save(String payload) throws JsonProcessingException {
     Customer customer =
