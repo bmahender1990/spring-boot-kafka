@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import com.google.gson.Gson;
 import com.prokarma.engineering.customer.publisher.common.LogMaskingConverter;
+import com.prokarma.engineering.customer.publisher.configuration.JsonConfiguration;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.service.KafkaProducerService;
 
@@ -24,7 +24,7 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
   private KafkaTemplate<String, String> kafkaTemplate;
 
   @Autowired
-  private Gson jsonConverter;
+  private JsonConfiguration jsonConfiguration;
 
   @Autowired
   private LogMaskingConverter logMaskingConverter;
@@ -32,8 +32,9 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
   public void send(Customer customer) {
 
     Customer customerMasked = logMaskingConverter.maskCustomer(customer);
-    String customerJson = jsonConverter.toJson(customer);
-    String customerJsonMasked = jsonConverter.toJson(customerMasked);
+    String customerJson = jsonConfiguration.jsonToStringConverter(customer);
+    String customerJsonMasked = jsonConfiguration.jsonToStringConverter(customerMasked);
+
 
     kafkaTemplate.send(topic, customerJson).addCallback(
         result -> LOGGER.info(String.format("Sent message=[%s] with offset=[%s]",
