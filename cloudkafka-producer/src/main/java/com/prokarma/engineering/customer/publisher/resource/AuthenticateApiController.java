@@ -1,6 +1,5 @@
 package com.prokarma.engineering.customer.publisher.resource;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prokarma.engineering.customer.publisher.api.AuthenticateApi;
 import com.prokarma.engineering.customer.publisher.model.User;
 import com.prokarma.engineering.customer.publisher.security.model.AuthenticationResponse;
@@ -19,17 +17,12 @@ import com.prokarma.engineering.customer.publisher.security.util.JwtUtil;
 import com.prokarma.engineering.customer.publisher.service.impl.AppUserDetailsServiceImpl;
 import io.swagger.annotations.ApiParam;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
-    date = "2020-02-10T06:28:00.393Z")
 
 @Controller
 public class AuthenticateApiController implements AuthenticateApi {
 
   private static final Logger LOGGER = LogManager.getLogger(AuthenticateApiController.class);
 
-  private final ObjectMapper objectMapper;
-
-  private final HttpServletRequest request;
   @Autowired
   private AuthenticationManager authenticationManager;
 
@@ -39,11 +32,6 @@ public class AuthenticateApiController implements AuthenticateApi {
   @Autowired
   private AppUserDetailsServiceImpl userDetailsService;
 
-  @org.springframework.beans.factory.annotation.Autowired
-  public AuthenticateApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-    this.objectMapper = objectMapper;
-    this.request = request;
-  }
 
   public ResponseEntity<AuthenticationResponse> authenticate(
       @ApiParam(value = "Created user object", required = true) @Valid @RequestBody User user) {

@@ -16,9 +16,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
-    date = "2020-02-10T06:28:00.393Z")
-
 @Api(value = "kafka", description = "the kafka API")
 @RequestMapping(value = "")
 public interface CustomerKafkaApi {
