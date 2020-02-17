@@ -5,9 +5,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.prokarma.engineering.customer.publisher.model.User;
 import com.prokarma.engineering.customer.publisher.repositories.UserRepository;
+import com.prokarma.engineering.customer.publisher.service.UserService;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository repo;
