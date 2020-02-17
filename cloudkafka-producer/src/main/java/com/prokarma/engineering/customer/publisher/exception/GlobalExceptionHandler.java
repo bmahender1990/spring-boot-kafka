@@ -1,10 +1,13 @@
 package com.prokarma.engineering.customer.publisher.exception;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex,
       WebRequest request) {
     CustomerResponse errorDetails =
-        new CustomerResponse("error", ex.getMessage(), "ResourceNotFoundException");
+        new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
     return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
   }
 
@@ -35,13 +38,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
       HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-    String errormsg = "";
-    if (ex.getBindingResult() != null && ex.getBindingResult().getAllErrors() != null
-        && !ex.getBindingResult().getAllErrors().isEmpty()) {
-      errormsg = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+    List<String> details = new ArrayList<>();
+    for (ObjectError error : ex.getBindingResult().getAllErrors()) {
+      details.add(error.getDefaultMessage());
     }
     CustomerResponse errorDetails =
-        new CustomerResponse("error", errormsg, "InvalidRequestException");
+        new CustomerResponse("error", details.toString(), "InvalidRequestException");
     return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
   }
 }

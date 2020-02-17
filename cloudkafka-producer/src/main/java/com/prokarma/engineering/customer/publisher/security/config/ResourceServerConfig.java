@@ -12,7 +12,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http.headers().frameOptions().disable().and().authorizeRequests().antMatchers("/").permitAll()
-        .antMatchers("/prokarama/v1/**").authenticated();
+        .antMatchers("/prokarma/v1/**").authenticated();
   }
 
 
