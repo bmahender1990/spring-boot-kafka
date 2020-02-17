@@ -22,10 +22,10 @@ public interface CustomerKafkaApi {
 
   @ApiOperation(value = "Post customer data to kafka", nickname = "customer",
       notes = "Returns status", authorizations = {@Authorization(value = "o_auth", scopes = {})},
-      tags = {"kafka/customer",})
+      tags = {"prokarama/v1/customer",})
   @ApiResponses(value = {
       @ApiResponse(code = 405, message = "Invalid input", response = CustomerResponse.class)})
-  @RequestMapping(value = "/kafka/customer", produces = {"application/json"},
+  @RequestMapping(value = "/prokarama/v1/customer", produces = {"application/json"},
       consumes = {"application/json"}, method = RequestMethod.POST)
   default ResponseEntity<?> customer(
       @ApiParam(value = "customer object that needs to be post to kafka",
