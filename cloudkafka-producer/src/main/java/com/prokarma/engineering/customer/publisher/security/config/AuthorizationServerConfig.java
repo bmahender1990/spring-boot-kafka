@@ -1,6 +1,7 @@
 package com.prokarma.engineering.customer.publisher.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Value("${security.access-token-validity}")
+  private int accessTokenValidity;
+
+  @Value("${security.access-client}")
+  private String securityClient;
+
+  @Value("${security.access-password}")
+  private String securitypassword;
+
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -30,11 +40,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.inMemory().withClient("my-trusted-client")
+    clients.inMemory().withClient(securityClient)
         .authorizedGrantTypes("client_credentials", "password")
         .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT").scopes("read", "write", "trust")
-        .resourceIds("oauth2-resource").accessTokenValiditySeconds(5000)
-        .secret(passwordEncoder.encode("secret"));
+        .resourceIds("oauth2-resource").accessTokenValiditySeconds(accessTokenValidity)
+        .secret(passwordEncoder.encode(securitypassword));
   }
 
 
