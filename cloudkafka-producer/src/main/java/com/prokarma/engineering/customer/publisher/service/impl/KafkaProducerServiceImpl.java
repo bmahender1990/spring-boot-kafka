@@ -1,6 +1,7 @@
 package com.prokarma.engineering.customer.publisher.service.impl;
 
 
+import org.apache.kafka.common.KafkaException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,16 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
     kafkaTemplate.send(topic, customerJson).addCallback(
         result -> LOGGER.info(String.format("Sent message=[%s] with offset=[%s]",
             customerJsonMasked, result.getRecordMetadata().offset())),
-        ex -> LOGGER.error(String.format("Unable to send message=[%s] due to : %s",
-            customerJsonMasked, ex.getMessage())));
+        ex -> errorResponse(ex, customerJsonMasked));
 
+
+
+  }
+
+  public void errorResponse(Throwable ex, String customerJsonMasked) {
+    LOGGER.error(String.format("Unable to send message=[%s] due to : %s", customerJsonMasked,
+        ex.getMessage()));
+    throw new KafkaException("Something Went Wrong with kafka");
   }
 
 }
