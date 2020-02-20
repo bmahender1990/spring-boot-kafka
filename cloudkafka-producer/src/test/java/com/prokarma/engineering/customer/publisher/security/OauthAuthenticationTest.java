@@ -9,7 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,6 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import com.prokarma.engineering.customer.publisher.AbstractTest;
+import com.prokarma.engineering.customer.publisher.model.Customer;
+import com.prokarma.engineering.customer.publisher.resource.CustomerKafkaApiController;
 import com.prokarma.engineering.customer.publisher.service.impl.CustomUserDetailsServiceImpl;
 import com.prokarma.engineering.customer.publisher.service.impl.KafkaProducerServiceImpl;
 
@@ -36,6 +40,13 @@ public class OauthAuthenticationTest extends AbstractTest {
   @InjectMocks
   private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
+  @InjectMocks
+  private CustomerKafkaApiController customerKafkaApi;
+
+  @Mock
+  private Customer customer;
+
+  private HttpHeaders httpHeaders;
 
   private String validPayload =
       "{\r\n" + "  \"customerNumber\": \"Abcd123\",\r\n" + "  \"firstName\": \"Testcustomer\",\r\n"
@@ -44,7 +55,7 @@ public class OauthAuthenticationTest extends AbstractTest {
           + "  \"mobileNumber\": 9701682182,\r\n" + "  \"email\": \"abc@gmail.com\",\r\n"
           + "  \"customerStatus\": \"Open\",\r\n" + "  \"address\": {\r\n"
           + "    \"addressLine1\": \"string1\",\r\n" + "    \"addressLine2\": \"string1\",\r\n"
-          + "    \"street\": \"string1\",\r\n" + "    \"postalCode\": 50431\r\n" + "  }\r\n" + "}";
+          + "    \"street\": \"string1\",\r\n" + "    \"postalCode\": 51231\r\n" + "  }\r\n" + "}";
 
 
   @Test
@@ -61,11 +72,25 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void kafkaCustomerAccess() throws Exception {
     String uri = "/prokarma/v1/customer";
-    MvcResult mvcResult =
-        mvc.perform(MockMvcRequestBuilders.post(uri).accept(MediaType.APPLICATION_JSON_VALUE))
-            .andReturn();
+    httpHeaders = new HttpHeaders();
+    httpHeaders.add("Activity-Id", "mobile");
+    httpHeaders.add("Application-Id", "12345");
+
+    ResultActions result = obtainAccessToken("user", "user");
+    result.andExpect(status().isOk());
+    String resultString = result.andReturn().getResponse().getContentAsString();
+
+    String accessToken = JacksonJsonParser().parseMap(resultString).get("access_token").toString();
+    httpHeaders.add("Authorization", "Bearer " + accessToken);
+
+    MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri).content(validPayload)
+        .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON_VALUE)
+        .headers(httpHeaders)).andReturn();
     int status = mvcResult.getResponse().getStatus();
-    assertEquals(401, status);
+    String response = mvcResult.getResponse().getContentAsString();
+    String responseStatus = JacksonJsonParser().parseMap(response).get("status").toString();
+    assertEquals(202, status);
+    assertEquals("success", responseStatus);
   }
 
   @Test
@@ -76,7 +101,6 @@ public class OauthAuthenticationTest extends AbstractTest {
     String resultString = result.andReturn().getResponse().getContentAsString();
 
     String accessToken = JacksonJsonParser().parseMap(resultString).get("access_token").toString();
-    System.out.println("accessToken------>" + accessToken);
   }
 
   @Test

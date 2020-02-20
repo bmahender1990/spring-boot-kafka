@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.prokarma.engineering.customer.publisher.api.CustomerKafkaApi;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.model.CustomerResponse;
-import com.prokarma.engineering.customer.publisher.service.impl.KafkaProducerServiceImpl;
+import com.prokarma.engineering.customer.publisher.service.KafkaProducerService;
 import io.swagger.annotations.ApiParam;
 
 
@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiParam;
 public class CustomerKafkaApiController implements CustomerKafkaApi {
 
   @Autowired
-  private KafkaProducerServiceImpl producer;
+  private KafkaProducerService producer;
 
   @Override
   public ResponseEntity<?> customer(

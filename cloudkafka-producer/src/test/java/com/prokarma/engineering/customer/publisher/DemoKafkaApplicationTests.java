@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -35,16 +34,13 @@ public class DemoKafkaApplicationTests extends AbstractTest {
   }
 
 
-  @Autowired
-  KafkaProducerServiceImpl kafkaProducerServiceImpl;
-
   @InjectMocks
   private KafkaProducerServiceImpl kafkaProducerService;
 
   @InjectMocks
   private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
-  @InjectMocks()
+  @InjectMocks
   private CustomerKafkaApiController customerKafkaApi;
 
   @Mock
