@@ -27,6 +27,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(KafkaNetworkException.class)
+  public ResponseEntity<?> kafkaNetworkException(KafkaNetworkException ex, WebRequest request) {
+    CustomerResponse errorDetails =
+        new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
+    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+  }
+
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<?> globleExcpetionHandler(Exception ex, WebRequest request) {
     CustomerResponse errorDetails =
