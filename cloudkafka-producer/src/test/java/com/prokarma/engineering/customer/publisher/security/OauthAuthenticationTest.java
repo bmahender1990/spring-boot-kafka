@@ -72,7 +72,7 @@ public class OauthAuthenticationTest extends AbstractTest {
     httpHeaders.add("Activity-Id", "mobile");
     httpHeaders.add("Application-Id", "12345");
 
-    ResultActions result = obtainAccessToken("user", "user");
+    ResultActions result = obtainAccessToken();
     result.andExpect(status().isOk());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -92,7 +92,7 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void accessToken() throws Exception {
 
-    ResultActions result = obtainAccessToken("user", "user");
+    ResultActions result = obtainAccessToken();
     result.andExpect(status().isOk());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -102,7 +102,7 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void badCredentials() throws Exception {
 
-    ResultActions result = obtainAccessToken("user2", "user");
+    ResultActions result = obtainAccessToken();
     result.andExpect(status().is4xxClientError());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -114,7 +114,7 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void badCredentialsPassword() throws Exception {
 
-    ResultActions result = obtainAccessToken("user2", "user2");
+    ResultActions result = obtainAccessToken();
     result.andExpect(status().is4xxClientError());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -123,13 +123,11 @@ public class OauthAuthenticationTest extends AbstractTest {
     assertEquals("Bad credentials", error_description);
   }
 
-  private ResultActions obtainAccessToken(String username, String password) throws Exception {
+  private ResultActions obtainAccessToken() throws Exception {
 
     MultiValueMap<String, String> params = new LinkedMultiValueMap();
     params.add("grant_type", "client_credentials");
     params.add("client_id", "my-trusted-client");
-    params.add("username", username);
-    params.add("password", password);
 
     String base64ClientCredentials =
         new String(Base64.encodeBase64("my-trusted-client:secret".getBytes()));
