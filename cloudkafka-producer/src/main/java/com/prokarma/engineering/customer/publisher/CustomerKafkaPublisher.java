@@ -13,10 +13,10 @@ import com.prokarma.engineering.customer.publisher.service.impl.UserServiceImpl;
 
 
 @SpringBootApplication
-public class SampleKafkaApplication {
+public class CustomerKafkaPublisher {
 
   public static void main(String[] args) {
-    SpringApplication.run(SampleKafkaApplication.class, args);
+    SpringApplication.run(CustomerKafkaPublisher.class, args);
   }
 
 

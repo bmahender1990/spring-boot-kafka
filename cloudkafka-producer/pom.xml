@@ -20,7 +20,7 @@
 		<spring-cloud.version>Finchley.SR1</spring-cloud.version>		
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<start-class>com.prokarma.engineering.customer.publisher.SampleKafkaApplication</start-class>		
+		<start-class>com.prokarma.engineering.customer.publisher.CustomerKafkaPublisher</start-class>		
 	</properties>
 
 	<dependencies>

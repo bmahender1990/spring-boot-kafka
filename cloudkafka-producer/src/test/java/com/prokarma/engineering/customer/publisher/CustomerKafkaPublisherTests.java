@@ -26,7 +26,7 @@ import com.prokarma.engineering.customer.publisher.service.impl.KafkaProducerSer
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DemoKafkaApplicationTests extends AbstractTest {
+public class CustomerKafkaPublisherTests extends AbstractTest {
 
   @Before
   public void setUp() {

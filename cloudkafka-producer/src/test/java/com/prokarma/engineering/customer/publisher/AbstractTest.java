@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoKafkaApplicationTests.class)
+@SpringBootTest(classes = CustomerKafkaPublisherTests.class)
 @WebAppConfiguration
 public abstract class AbstractTest {
   protected MockMvc mvc;
