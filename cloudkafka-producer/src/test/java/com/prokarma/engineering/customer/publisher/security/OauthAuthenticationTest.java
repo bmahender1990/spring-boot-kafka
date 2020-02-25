@@ -72,7 +72,7 @@ public class OauthAuthenticationTest extends AbstractTest {
     httpHeaders.add("Activity-Id", "mobile");
     httpHeaders.add("Application-Id", "12345");
 
-    ResultActions result = obtainAccessToken();
+    ResultActions result = obtainAccessToken("my-trusted-client", "my-trusted-client:secret");
     result.andExpect(status().isOk());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -92,7 +92,7 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void accessToken() throws Exception {
 
-    ResultActions result = obtainAccessToken();
+    ResultActions result = obtainAccessToken("my-trusted-client", "my-trusted-client:secret");
     result.andExpect(status().isOk());
     String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -102,35 +102,29 @@ public class OauthAuthenticationTest extends AbstractTest {
   @Test
   public void badCredentials() throws Exception {
 
-    ResultActions result = obtainAccessToken();
+    ResultActions result = obtainAccessToken("my-trusted-client", "my-trusted-client:secret123");
     result.andExpect(status().is4xxClientError());
-    String resultString = result.andReturn().getResponse().getContentAsString();
 
-    String error_description =
-        JacksonJsonParser().parseMap(resultString).get("error_description").toString();
-    assertEquals("Bad credentials", error_description);
   }
 
   @Test
   public void badCredentialsPassword() throws Exception {
 
-    ResultActions result = obtainAccessToken();
+    ResultActions result = obtainAccessToken("my-trusted-clientqweq", "my-trusted-client:secret");
     result.andExpect(status().is4xxClientError());
     String resultString = result.andReturn().getResponse().getContentAsString();
-
-    String error_description =
-        JacksonJsonParser().parseMap(resultString).get("error_description").toString();
-    assertEquals("Bad credentials", error_description);
+    System.out.println("---->" + resultString);
+    String error_description = JacksonJsonParser().parseMap(resultString).get("error").toString();
+    assertEquals("invalid_client", error_description);
   }
 
-  private ResultActions obtainAccessToken() throws Exception {
+  private ResultActions obtainAccessToken(String client_id, String password) throws Exception {
 
     MultiValueMap<String, String> params = new LinkedMultiValueMap();
     params.add("grant_type", "client_credentials");
-    params.add("client_id", "my-trusted-client");
+    params.add("client_id", client_id);
 
-    String base64ClientCredentials =
-        new String(Base64.encodeBase64("my-trusted-client:secret".getBytes()));
+    String base64ClientCredentials = new String(Base64.encodeBase64(password.getBytes()));
 
     ResultActions result = mvc.perform(post("/oauth/token").params(params)
         .header("Authorization", "Basic " + base64ClientCredentials)
