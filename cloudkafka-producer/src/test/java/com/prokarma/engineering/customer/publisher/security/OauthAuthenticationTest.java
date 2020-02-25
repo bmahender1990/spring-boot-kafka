@@ -22,7 +22,6 @@ import org.springframework.util.MultiValueMap;
 import com.prokarma.engineering.customer.publisher.AbstractTest;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.resource.CustomerKafkaApiController;
-import com.prokarma.engineering.customer.publisher.service.impl.CustomUserDetailsServiceImpl;
 import com.prokarma.engineering.customer.publisher.service.impl.KafkaProducerServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -36,9 +35,6 @@ public class OauthAuthenticationTest extends AbstractTest {
 
   @InjectMocks
   private KafkaProducerServiceImpl kafkaProducerService;
-
-  @InjectMocks
-  private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
   @InjectMocks
   private CustomerKafkaApiController customerKafkaApi;
@@ -130,7 +126,7 @@ public class OauthAuthenticationTest extends AbstractTest {
   private ResultActions obtainAccessToken(String username, String password) throws Exception {
 
     MultiValueMap<String, String> params = new LinkedMultiValueMap();
-    params.add("grant_type", "password");
+    params.add("grant_type", "client_credentials");
     params.add("client_id", "my-trusted-client");
     params.add("username", username);
     params.add("password", password);

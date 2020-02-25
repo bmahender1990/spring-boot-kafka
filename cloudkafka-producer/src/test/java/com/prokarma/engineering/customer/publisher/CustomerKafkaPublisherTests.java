@@ -21,7 +21,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.resource.CustomerKafkaApiController;
-import com.prokarma.engineering.customer.publisher.service.impl.CustomUserDetailsServiceImpl;
 import com.prokarma.engineering.customer.publisher.service.impl.KafkaProducerServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -36,9 +35,6 @@ public class CustomerKafkaPublisherTests extends AbstractTest {
 
   @InjectMocks
   private KafkaProducerServiceImpl kafkaProducerService;
-
-  @InjectMocks
-  private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
   @InjectMocks
   private CustomerKafkaApiController customerKafkaApi;

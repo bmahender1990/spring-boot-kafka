@@ -21,7 +21,7 @@ public class CustomerKafkaApiController implements CustomerKafkaApi {
   private KafkaProducerService producer;
 
   @Override
-  public ResponseEntity<?> customer(
+  public ResponseEntity<CustomerResponse> customer(
       @ApiParam(required = true) @Valid @RequestBody Customer customer,
       @ApiParam(value = "Authorization token", required = true) @RequestHeader(
           value = "Authorization", required = true) String authorization,
@@ -34,7 +34,7 @@ public class CustomerKafkaApiController implements CustomerKafkaApi {
     producer.send(customer);
 
     CustomerResponse response = new CustomerResponse("success", "successfully pussed");
-    return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    return new ResponseEntity<CustomerResponse>(response, HttpStatus.ACCEPTED);
   }
 
 }
