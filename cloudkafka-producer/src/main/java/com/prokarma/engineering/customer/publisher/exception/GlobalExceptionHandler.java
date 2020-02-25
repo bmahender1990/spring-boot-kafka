@@ -32,7 +32,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
       WebRequest request) {
     CustomerResponse errorDetails =
         new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
-    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 
