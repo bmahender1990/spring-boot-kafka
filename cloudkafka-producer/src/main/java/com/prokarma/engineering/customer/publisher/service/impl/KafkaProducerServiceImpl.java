@@ -1,7 +1,6 @@
 package com.prokarma.engineering.customer.publisher.service.impl;
 
 
-import org.apache.kafka.common.KafkaException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.prokarma.engineering.customer.publisher.common.LogMaskingConverter;
 import com.prokarma.engineering.customer.publisher.configuration.JsonConfiguration;
+import com.prokarma.engineering.customer.publisher.exception.KafkaNetworkException;
 import com.prokarma.engineering.customer.publisher.model.Customer;
 import com.prokarma.engineering.customer.publisher.service.KafkaProducerService;
 
@@ -49,7 +49,7 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
   public void errorResponse(Throwable ex, String customerJsonMasked) {
     LOGGER.error(String.format("Unable to send message=[%s] due to : %s", customerJsonMasked,
         ex.getMessage()));
-    throw new KafkaException("Something Went Wrong with kafka");
+    throw new KafkaNetworkException("Something Went Wrong with kafka");
   }
 
 }
