@@ -20,7 +20,7 @@ import com.prokarma.engineering.customer.publisher.model.CustomerResponse;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex,
+  public ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException ex,
       WebRequest request) {
     CustomerResponse errorDetails =
         new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
@@ -28,7 +28,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   @ExceptionHandler(KafkaNetworkException.class)
-  public ResponseEntity<?> kafkaNetworkException(KafkaNetworkException ex, WebRequest request) {
+  public ResponseEntity<Object> kafkaNetworkException(KafkaNetworkException ex,
+      WebRequest request) {
     CustomerResponse errorDetails =
         new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
     return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
@@ -36,9 +37,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<?> globleExcpetionHandler(Exception ex, WebRequest request) {
+  public ResponseEntity<Object> globleExcpetionHandler(Exception ex, WebRequest request) {
     CustomerResponse errorDetails =
-        new CustomerResponse("error", ex.getMessage(), "GeneralException");
+        new CustomerResponse("error", ex.getMessage(), ex.getLocalizedMessage());
     return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
